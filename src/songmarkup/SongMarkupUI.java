@@ -1,0 +1,939 @@
+package songmarkup;
+
+import com.hp.hpl.jena.graph.Node_Literal;
+import com.hp.hpl.jena.graph.Triple;
+import com.hp.hpl.jena.ontology.Individual;
+import com.hp.hpl.jena.ontology.OntClass;
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.ontology.OntModelSpec;
+import com.hp.hpl.jena.ontology.OntProperty;
+import com.hp.hpl.jena.ontology.OntResource;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.rdf.model.impl.PropertyImpl;
+import com.hp.hpl.jena.util.FileManager;
+import com.hp.hpl.jena.util.iterator.ExtendedIterator;
+import java.awt.Dimension;
+import java.awt.MenuItem;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingWorker;
+import javax.swing.UIManager;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import jsyntaxpane.DefaultSyntaxKit;
+
+/**
+ *
+ * @author Keshan De Silva
+ */
+public class SongMarkupUI extends javax.swing.JFrame
+{
+    private File owlFile;
+    private OntModel model;
+    private OntClass songClass;
+    private KeyValueTableModel keyValueTableModel;
+    private KeyValueTableModel keyValueInstanceTableModel;
+    private SelectValueTableModel categorySelectValueTableModel;
+    private SelectValueTableModel contentSelectValueTableModel;
+    private SearchResultTableModel searchResultTableModel;
+    
+    HashMap<DefaultMutableTreeNode, ArrayList<DefaultMutableTreeNode>> nodeMap = new HashMap<>();
+
+    
+    /**
+     * Creates new form SongMarkupUI
+     */
+    public SongMarkupUI()
+    {
+        try
+        {
+            //UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(SongMarkupUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        initComponents();
+        keyValueTableModel = new KeyValueTableModel();
+        propertyTable.setModel(keyValueTableModel);
+        
+        keyValueInstanceTableModel = new KeyValueTableModel();
+        newInstancePropertyTable.setModel(keyValueInstanceTableModel);
+                
+        categorySelectValueTableModel = new SelectValueTableModel();
+        tableCategory.setModel(categorySelectValueTableModel);
+        tableCategory.getColumnModel().getColumn(0).setMaxWidth(30);
+        
+        contentSelectValueTableModel = new SelectValueTableModel();
+        tableContent.setModel(contentSelectValueTableModel); 
+        tableContent.getColumnModel().getColumn(0).setMaxWidth(30);
+        
+        searchResultTableModel = new SearchResultTableModel();
+        tableResult.setModel(searchResultTableModel);
+        setSize(new Dimension(1000, 600));
+        
+        DefaultSyntaxKit.initKit();
+        classTree.setCellRenderer(new IconTreeCellRendere());
+        treeInstances.setCellRenderer(new IconTreeCellRendere());
+        classTreeNew.setCellRenderer(new IconTreeCellRendere());
+        
+        newItem.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent ae)
+            {
+                if (classTreeNew.getSelectionPath() != null)
+                {
+                    keyValueInstanceTableModel.clearKeyValues();
+                    keyValueInstanceTableModel.setEditable(true);
+                    DefaultMutableTreeNode selectedClassNode = (DefaultMutableTreeNode)classTreeNew.getSelectionPath().getLastPathComponent();
+                    OntClass ontoClass = (OntClass)selectedClassNode.getUserObject();
+
+                    ExtendedIterator<OntProperty> propertyIterator = ontoClass.listDeclaredProperties();
+                    while (propertyIterator.hasNext())
+                    {
+                        OntProperty ontProperty = propertyIterator.next();
+                        KeyValue keyValue = new KeyValue(ontProperty.getLocalName(), "");
+                        keyValueInstanceTableModel.addKeyValue(keyValue);    
+                    }
+                    
+                    txtName.setText(ontoClass.getLocalName() + "_1");
+                }
+            }
+        });
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents()
+    {
+
+        menuCreateInstance = new javax.swing.JPopupMenu();
+        newItem = new javax.swing.JMenuItem();
+        mainTabPanel = new javax.swing.JTabbedPane();
+        panelLoadOWL = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtPath = new javax.swing.JTextField();
+        btnBrowse = new javax.swing.JButton();
+        btnLoad = new javax.swing.JButton();
+        editorScroll = new javax.swing.JScrollPane();
+        textArea = new javax.swing.JEditorPane();
+        jPanel2 = new javax.swing.JPanel();
+        scrollPanel = new javax.swing.JScrollPane();
+        classTree = new javax.swing.JTree();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        propertyTable = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        treeInstances = new javax.swing.JTree();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tableResult = new javax.swing.JTable();
+        searchPanel = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tableContent = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tableCategory = new javax.swing.JTable();
+        btnSearch = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        labelImage = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        newInstancePropertyTable = new javax.swing.JTable();
+        lblName = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        scrollPanel1 = new javax.swing.JScrollPane();
+        classTreeNew = new javax.swing.JTree();
+        btnSave = new javax.swing.JButton();
+        btnUpdateXML = new javax.swing.JButton();
+        progressBar = new javax.swing.JProgressBar();
+
+        newItem.setText("Create New Instance");
+        menuCreateInstance.add(newItem);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        mainTabPanel.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+
+        jLabel1.setText("OWL File Path : ");
+
+        btnBrowse.setText("Browse");
+        btnBrowse.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnBrowseActionPerformed(evt);
+            }
+        });
+
+        btnLoad.setText("Load");
+        btnLoad.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnLoadActionPerformed(evt);
+            }
+        });
+
+        textArea.setEditable(false);
+        editorScroll.setViewportView(textArea);
+
+        javax.swing.GroupLayout panelLoadOWLLayout = new javax.swing.GroupLayout(panelLoadOWL);
+        panelLoadOWL.setLayout(panelLoadOWLLayout);
+        panelLoadOWLLayout.setHorizontalGroup(
+            panelLoadOWLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLoadOWLLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelLoadOWLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(editorScroll)
+                    .addGroup(panelLoadOWLLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtPath)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLoadOWLLayout.createSequentialGroup()
+                        .addGap(0, 460, Short.MAX_VALUE)
+                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        panelLoadOWLLayout.setVerticalGroup(
+            panelLoadOWLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLoadOWLLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelLoadOWLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBrowse)
+                    .addComponent(btnLoad))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editorScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        mainTabPanel.addTab("Load Ontology", panelLoadOWL);
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        classTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        classTree.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                classTreeMouseClicked(evt);
+            }
+        });
+        scrollPanel.setViewportView(classTree);
+
+        propertyTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String []
+            {
+
+            }
+        ));
+        jScrollPane1.setViewportView(propertyTable);
+
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        treeInstances.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        treeInstances.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                treeInstancesMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(treeInstances);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPanel)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane3))
+                .addContainerGap())
+        );
+
+        mainTabPanel.addTab("Classes", jPanel2);
+
+        tableResult.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String []
+            {
+
+            }
+        ));
+        jScrollPane6.setViewportView(tableResult);
+
+        searchPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Search Criteria"));
+
+        tableContent.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String []
+            {
+
+            }
+        ));
+        jScrollPane4.setViewportView(tableContent);
+
+        tableCategory.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String []
+            {
+
+            }
+        ));
+        jScrollPane5.setViewportView(tableCategory);
+
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Content");
+
+        jLabel3.setText("Category");
+
+        labelImage.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        labelImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Search-icon.png"))); // NOI18N
+        labelImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
+        searchPanel.setLayout(searchPanelLayout);
+        searchPanelLayout.setHorizontalGroup(
+            searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(searchPanelLayout.createSequentialGroup()
+                        .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(searchPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(searchPanelLayout.createSequentialGroup()
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        searchPanelLayout.setVerticalGroup(
+            searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                    .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(8, 8, 8)
+                .addComponent(btnSearch)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6)
+                    .addComponent(searchPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(searchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        mainTabPanel.addTab("Semantic Song Search", jPanel3);
+
+        newInstancePropertyTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String []
+            {
+
+            }
+        ));
+        jScrollPane2.setViewportView(newInstancePropertyTable);
+
+        lblName.setText("Name : ");
+
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        classTreeNew.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        classTreeNew.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                classTreeNewMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                classTreeNewMouseReleased(evt);
+            }
+        });
+        scrollPanel1.setViewportView(classTreeNew);
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        btnUpdateXML.setText("Update XML");
+        btnUpdateXML.setEnabled(false);
+        btnUpdateXML.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnUpdateXMLActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrollPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtName)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateXML, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblName)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(btnSave)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnUpdateXML)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+
+        mainTabPanel.addTab("Markup Song", jPanel4);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mainTabPanel)
+            .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainTabPanel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBrowseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBrowseActionPerformed
+    {//GEN-HEADEREND:event_btnBrowseActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("OWL Ontology Files (*.owl)", "owl"));
+
+        int option = fileChooser.showOpenDialog(this);
+        
+        if (option == JFileChooser.APPROVE_OPTION)
+        {
+            owlFile = fileChooser.getSelectedFile();
+            txtPath.setText(owlFile.getAbsolutePath());
+        }
+        
+    }//GEN-LAST:event_btnBrowseActionPerformed
+
+    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnLoadActionPerformed
+    {//GEN-HEADEREND:event_btnLoadActionPerformed
+
+        SwingWorker swingWorker = new SwingWorker()
+        {
+            @Override
+            protected Object doInBackground() throws Exception
+            {
+                model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+                InputStream in = FileManager.get().open(owlFile.getAbsolutePath());
+
+                if (in == null)
+                {
+                    JOptionPane.showMessageDialog(null, "Invalid OWL File : " + owlFile.getAbsolutePath(),
+                                                        "Invalid OWL File", JOptionPane.WARNING_MESSAGE);
+                }
+                model.read(in, null);
+                
+                textArea.setContentType("text/xml");
+                textArea.read(new FileReader(owlFile), null);
+                
+                // Generate Tree
+                DefaultMutableTreeNode top = new DefaultMutableTreeNode("Songs Ontology");
+                ExtendedIterator classes = model.listClasses();
+
+                while (classes.hasNext())
+                {
+                    OntClass ontClass = (OntClass) classes.next();
+                    DefaultMutableTreeNode classNode = new DefaultMutableTreeNode(ontClass); 
+                    top.add(classNode);
+                    
+                    ExtendedIterator instances = ontClass.listInstances();
+                    ArrayList<DefaultMutableTreeNode> instanceList = new ArrayList<>();
+                    while (instances.hasNext())
+                    {
+                        OntResource instance = (OntResource)instances.next();
+                        DefaultMutableTreeNode instanceNode = new DefaultMutableTreeNode(instance);
+                        instanceList.add(instanceNode);    
+                    }
+                    
+                    nodeMap.put(classNode, instanceList);
+                    
+                    // update Content and Category
+                    switch (ontClass.getLocalName())
+                    {
+                        case "Song":
+                        {
+                            songClass = ontClass;
+                            break;
+                        }
+                        case "Content":
+                        {
+                            ExtendedIterator subClasses = ontClass.listSubClasses();
+                            while (subClasses.hasNext())
+                            {
+                                OntClass sub = (OntClass)subClasses.next();
+                                ExtendedIterator subInstance = sub.listInstances();
+                                while (subInstance.hasNext())
+                                {
+                                    OntResource instance = (OntResource)subInstance.next();
+                                    contentSelectValueTableModel.addSelectValue(new SelectValue(true, instance.getLocalName()));
+                                }
+                            }       
+                            break;
+                        }
+                        case "Category":
+                        {
+                            ExtendedIterator subClasses = ontClass.listSubClasses();
+                            while (subClasses.hasNext())
+                            {
+                                OntClass sub = (OntClass)subClasses.next();
+                                ExtendedIterator subInstance = sub.listInstances();
+                                while (subInstance.hasNext())
+                                {
+                                    OntResource instance = (OntResource)subInstance.next();
+                                    categorySelectValueTableModel.addSelectValue(new SelectValue(true, instance.getLocalName()));
+                                }
+                            }       
+                            break;
+                        }
+//                    ExtendedIterator subClasses = ontClass.listSubClasses();
+//                    while (subClasses.hasNext())
+//                    {
+//                        OntClass subClass = (OntClass) subClasses.next();
+//                        DefaultMutableTreeNode subClassNode;
+//                        if (nodeMap.get(subClass.getLocalName()) != null)
+//                        {
+//                            subClassNode = nodeMap.get(subClass.getLocalName());
+//                        }
+//                        else
+//                        {
+//                            subClassNode = new DefaultMutableTreeNode(subClass.getLocalName());
+//                            classNode.add(subClassNode);
+//                        }
+//                        nodeMap.put(ontClass.getLocalName(), classNode);
+//                        
+//                    }
+                    }
+
+                    
+                }
+                classTree.setModel(new DefaultTreeModel(top));
+                classTreeNew.setModel(new DefaultTreeModel(top));
+                return model;
+            }
+
+            @Override
+            protected void done()
+            {
+                progressBar.setIndeterminate(false);
+            }   
+        };
+        swingWorker.execute();
+        progressBar.setIndeterminate(true);
+    }//GEN-LAST:event_btnLoadActionPerformed
+
+    private void classTreeMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_classTreeMouseClicked
+    {//GEN-HEADEREND:event_classTreeMouseClicked
+        // TODO add your handling code here:
+        if (classTree.getSelectionPath() != null)
+        {
+            DefaultMutableTreeNode selectedClassNode = (DefaultMutableTreeNode)classTree.getSelectionPath().getLastPathComponent();
+            ArrayList<DefaultMutableTreeNode> nodeList = nodeMap.get(selectedClassNode);
+
+            DefaultMutableTreeNode root = new DefaultMutableTreeNode(selectedClassNode.getUserObject());
+            for (DefaultMutableTreeNode node : nodeList)
+            {
+                root.add(node);
+            }
+
+            treeInstances.setModel(new DefaultTreeModel(root));
+        }
+        
+    }//GEN-LAST:event_classTreeMouseClicked
+
+    private void treeInstancesMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_treeInstancesMouseClicked
+    {//GEN-HEADEREND:event_treeInstancesMouseClicked
+        if (treeInstances.getSelectionPath() != null)
+        {
+            keyValueTableModel.clearKeyValues();
+            DefaultMutableTreeNode selectedClassNode = (DefaultMutableTreeNode)treeInstances.getSelectionPath().getLastPathComponent();
+            OntResource instance = (OntResource)selectedClassNode.getUserObject();
+            
+            StmtIterator propertyIterator = instance.listProperties();
+            while (propertyIterator.hasNext())
+            {
+                Statement statement = propertyIterator.nextStatement();
+                Triple triple = statement.asTriple();
+                KeyValue keyValue;
+                if (triple.getObject() instanceof Node_Literal)
+                {
+                    keyValue = new KeyValue(triple.getPredicate().getLocalName(), triple.getObject().getLiteralValue().toString());
+                }
+                else
+                {
+                    keyValue = new KeyValue(triple.getPredicate().getLocalName(), triple.getObject().getLocalName());
+                }
+                
+                keyValueTableModel.addKeyValue(keyValue);    
+            }
+        }
+    }//GEN-LAST:event_treeInstancesMouseClicked
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSearchActionPerformed
+    {//GEN-HEADEREND:event_btnSearchActionPerformed
+        SwingWorker swingWorker = new SwingWorker()
+        {
+            @Override
+            protected Object doInBackground() throws Exception
+            {
+                searchResultTableModel.clear();
+                ExtendedIterator instances = songClass.listInstances();
+                while (instances.hasNext())
+                {
+                    OntResource instance = (OntResource)instances.next();
+                    StmtIterator propertyIterator = instance.listProperties();
+                    while (propertyIterator.hasNext())
+                    {
+                        Statement statement = propertyIterator.nextStatement();
+                        Triple triple = statement.asTriple();
+                        if (triple.getPredicate().getLocalName().equals("major_content"))
+                        {
+                            String content = triple.getObject().getLocalName();
+                            if (contentSelectValueTableModel.isSelected(content))
+                            {
+                                searchResultTableModel.addOntResource(instance);
+                                break;
+                            }
+                        }
+                        else if (triple.getPredicate().getLocalName().equals("major_category"))
+                        {
+                            String category = triple.getObject().getLocalName();
+                            if (categorySelectValueTableModel.isSelected(category))
+                            {
+                                searchResultTableModel.addOntResource(instance);
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                return null;
+            }
+
+            @Override
+            protected void done()
+            {
+                progressBar.setIndeterminate(false);
+            }    
+        };
+        swingWorker.execute();
+        progressBar.setIndeterminate(true);
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void classTreeNewMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_classTreeNewMouseClicked
+    {//GEN-HEADEREND:event_classTreeNewMouseClicked
+
+    }//GEN-LAST:event_classTreeNewMouseClicked
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSaveActionPerformed
+    {//GEN-HEADEREND:event_btnSaveActionPerformed
+        DefaultMutableTreeNode selectedClassNode = (DefaultMutableTreeNode)classTreeNew.getSelectionPath().getLastPathComponent();
+        OntClass ontoClass = (OntClass)selectedClassNode.getUserObject();
+        
+        String instanceName = txtName.getText().replaceAll(" ", "_");
+        Individual individual = ontoClass.createIndividual(instanceName);
+        
+        for (KeyValue keyValue : keyValueInstanceTableModel.getUpdatedKeyValues())
+        {
+            Property property = model.getProperty("http://www.keshandesilva.com/ontologies/songs#" + keyValue.getKey());
+            individual.addProperty(property, keyValue.getValue());
+        }
+        
+        JOptionPane.showMessageDialog(this, "New Instance added succesfully!", "Individual Added", JOptionPane.INFORMATION_MESSAGE);
+        txtName.setText("");
+        keyValueInstanceTableModel.clearKeyValues();
+        btnUpdateXML.setEnabled(true);
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void classTreeNewMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_classTreeNewMouseReleased
+    {//GEN-HEADEREND:event_classTreeNewMouseReleased
+        if (evt.isPopupTrigger())
+        {
+            if (classTreeNew.getSelectionPath() != null)
+            {
+                menuCreateInstance.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }
+    }//GEN-LAST:event_classTreeNewMouseReleased
+
+    private void btnUpdateXMLActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnUpdateXMLActionPerformed
+    {//GEN-HEADEREND:event_btnUpdateXMLActionPerformed
+        SwingWorker swingWorker = new SwingWorker()
+        {
+            @Override
+            protected Object doInBackground() throws Exception
+            {
+                try
+                {
+                    try (PrintStream printStream = new PrintStream(owlFile.getAbsolutePath()))
+                    {
+                        model.write(printStream, null);
+                    }
+                }
+                catch (FileNotFoundException e)
+                {
+                    e.printStackTrace();  
+                }
+                
+                return null;
+            }
+
+            @Override
+            protected void done()
+            {
+                btnUpdateXML.setEnabled(false);
+                progressBar.setIndeterminate(false);
+                JOptionPane.showMessageDialog(null, "XML File Updated : " + owlFile.getAbsolutePath(), "XML File Updated", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+            
+        };
+        swingWorker.execute();
+        progressBar.setIndeterminate(true);
+    }//GEN-LAST:event_btnUpdateXMLActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[])
+    {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        }
+        catch (ClassNotFoundException ex)
+        {
+            java.util.logging.Logger.getLogger(SongMarkupUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (InstantiationException ex)
+        {
+            java.util.logging.Logger.getLogger(SongMarkupUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (IllegalAccessException ex)
+        {
+            java.util.logging.Logger.getLogger(SongMarkupUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
+            java.util.logging.Logger.getLogger(SongMarkupUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+                new SongMarkupUI().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBrowse;
+    private javax.swing.JButton btnLoad;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnUpdateXML;
+    private javax.swing.JTree classTree;
+    private javax.swing.JTree classTreeNew;
+    private javax.swing.JScrollPane editorScroll;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JLabel labelImage;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JTabbedPane mainTabPanel;
+    private javax.swing.JPopupMenu menuCreateInstance;
+    private javax.swing.JTable newInstancePropertyTable;
+    private javax.swing.JMenuItem newItem;
+    private javax.swing.JPanel panelLoadOWL;
+    private javax.swing.JProgressBar progressBar;
+    private javax.swing.JTable propertyTable;
+    private javax.swing.JScrollPane scrollPanel;
+    private javax.swing.JScrollPane scrollPanel1;
+    private javax.swing.JPanel searchPanel;
+    private javax.swing.JTable tableCategory;
+    private javax.swing.JTable tableContent;
+    private javax.swing.JTable tableResult;
+    private javax.swing.JEditorPane textArea;
+    private javax.swing.JTree treeInstances;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPath;
+    // End of variables declaration//GEN-END:variables
+}

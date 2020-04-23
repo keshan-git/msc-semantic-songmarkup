@@ -1,0 +1,833 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.keshandesilva.com/ontologies/songs"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.keshandesilva.com/ontologies/songs"
+     versionIRI="http://www.keshandesilva.com/ontologies/songs/1.0">
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Declaration>
+        <Class IRI="#Album"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Artist"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Category"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Classical"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Composer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Content"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Country"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Father"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Friendship"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Genre"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Love"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Mother"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Musician"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Nature"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Party"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Singer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Slow"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Song"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Wedding"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Writer"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#belongs_to"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#compose"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#compose_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#genre"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#major_category"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#major_content"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#music"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#music_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#sing"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#sing_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#sub_category"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#sub_content"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#write"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#writting_by"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#duration"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#rating"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#year"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Ahasa_Polawa_Watapitawa"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Akurata_Yannata_Kammali_Hithila"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Amma_Sandaki"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Asanka_Priyamantha_Peries"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Degoda_Thala_Ganga_Gala"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Dharmadasa_Walpola"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Lebunat_Net_Youga"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Mata_Mani_Wage"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Monawada_Amme_Akuru"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Oshada_Kesara"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Pana_Mada_Kadithi"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Samitha_Mudunkotuwa"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Sunil_Edirisinghe"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Swarnalatha_Kaweeshwara"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#T_M_Jayarathna"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Uththama_Muni_Dalada"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#children"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#classical"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#country"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#fathers_love"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#friendship"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#love"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#mothers_love"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#nature"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#party"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#slow"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#wedding"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#Classical"/>
+        <Class IRI="#Category"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Composer"/>
+        <Class IRI="#Artist"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Country"/>
+        <Class IRI="#Content"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Father"/>
+        <Class IRI="#Content"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Friendship"/>
+        <Class IRI="#Content"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Love"/>
+        <Class IRI="#Content"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Mother"/>
+        <Class IRI="#Content"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Musician"/>
+        <Class IRI="#Artist"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Nature"/>
+        <Class IRI="#Content"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Party"/>
+        <Class IRI="#Category"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Singer"/>
+        <Class IRI="#Artist"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Slow"/>
+        <Class IRI="#Category"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Wedding"/>
+        <Class IRI="#Category"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Writer"/>
+        <Class IRI="#Artist"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#Song"/>
+        <NamedIndividual IRI="#Ahasa_Polawa_Watapitawa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Song"/>
+        <NamedIndividual IRI="#Akurata_Yannata_Kammali_Hithila"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Song"/>
+        <NamedIndividual IRI="#Amma_Sandaki"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Singer"/>
+        <NamedIndividual IRI="#Asanka_Priyamantha_Peries"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Song"/>
+        <NamedIndividual IRI="#Degoda_Thala_Ganga_Gala"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Singer"/>
+        <NamedIndividual IRI="#Dharmadasa_Walpola"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Song"/>
+        <NamedIndividual IRI="#Lebunat_Net_Youga"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Song"/>
+        <NamedIndividual IRI="#Mata_Mani_Wage"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Song"/>
+        <NamedIndividual IRI="#Monawada_Amme_Akuru"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Singer"/>
+        <NamedIndividual IRI="#Oshada_Kesara"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Song"/>
+        <NamedIndividual IRI="#Pana_Mada_Kadithi"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Singer"/>
+        <NamedIndividual IRI="#Samitha_Mudunkotuwa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Singer"/>
+        <NamedIndividual IRI="#Sunil_Edirisinghe"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Singer"/>
+        <NamedIndividual IRI="#Swarnalatha_Kaweeshwara"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Singer"/>
+        <NamedIndividual IRI="#T_M_Jayarathna"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Song"/>
+        <NamedIndividual IRI="#Uththama_Muni_Dalada"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mother"/>
+        <NamedIndividual IRI="#children"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Classical"/>
+        <NamedIndividual IRI="#classical"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#country"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Father"/>
+        <NamedIndividual IRI="#fathers_love"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Friendship"/>
+        <NamedIndividual IRI="#friendship"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Love"/>
+        <NamedIndividual IRI="#love"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mother"/>
+        <NamedIndividual IRI="#mothers_love"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Nature"/>
+        <NamedIndividual IRI="#nature"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Party"/>
+        <NamedIndividual IRI="#party"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Slow"/>
+        <NamedIndividual IRI="#slow"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Wedding"/>
+        <NamedIndividual IRI="#wedding"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_category"/>
+        <NamedIndividual IRI="#Ahasa_Polawa_Watapitawa"/>
+        <NamedIndividual IRI="#classical"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_content"/>
+        <NamedIndividual IRI="#Ahasa_Polawa_Watapitawa"/>
+        <NamedIndividual IRI="#love"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#sing_by"/>
+        <NamedIndividual IRI="#Ahasa_Polawa_Watapitawa"/>
+        <NamedIndividual IRI="#Sunil_Edirisinghe"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_category"/>
+        <NamedIndividual IRI="#Akurata_Yannata_Kammali_Hithila"/>
+        <NamedIndividual IRI="#children"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_category"/>
+        <NamedIndividual IRI="#Akurata_Yannata_Kammali_Hithila"/>
+        <NamedIndividual IRI="#slow"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#sing_by"/>
+        <NamedIndividual IRI="#Akurata_Yannata_Kammali_Hithila"/>
+        <NamedIndividual IRI="#Swarnalatha_Kaweeshwara"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_category"/>
+        <NamedIndividual IRI="#Amma_Sandaki"/>
+        <NamedIndividual IRI="#slow"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_content"/>
+        <NamedIndividual IRI="#Amma_Sandaki"/>
+        <NamedIndividual IRI="#fathers_love"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#sing_by"/>
+        <NamedIndividual IRI="#Amma_Sandaki"/>
+        <NamedIndividual IRI="#T_M_Jayarathna"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_category"/>
+        <NamedIndividual IRI="#Degoda_Thala_Ganga_Gala"/>
+        <NamedIndividual IRI="#classical"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_content"/>
+        <NamedIndividual IRI="#Degoda_Thala_Ganga_Gala"/>
+        <NamedIndividual IRI="#love"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#sing_by"/>
+        <NamedIndividual IRI="#Degoda_Thala_Ganga_Gala"/>
+        <NamedIndividual IRI="#T_M_Jayarathna"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_category"/>
+        <NamedIndividual IRI="#Lebunat_Net_Youga"/>
+        <NamedIndividual IRI="#classical"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_content"/>
+        <NamedIndividual IRI="#Lebunat_Net_Youga"/>
+        <NamedIndividual IRI="#mothers_love"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#sing_by"/>
+        <NamedIndividual IRI="#Lebunat_Net_Youga"/>
+        <NamedIndividual IRI="#Asanka_Priyamantha_Peries"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_category"/>
+        <NamedIndividual IRI="#Mata_Mani_Wage"/>
+        <NamedIndividual IRI="#classical"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_content"/>
+        <NamedIndividual IRI="#Mata_Mani_Wage"/>
+        <NamedIndividual IRI="#country"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#sing_by"/>
+        <NamedIndividual IRI="#Mata_Mani_Wage"/>
+        <NamedIndividual IRI="#Oshada_Kesara"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#sub_content"/>
+        <NamedIndividual IRI="#Mata_Mani_Wage"/>
+        <NamedIndividual IRI="#children"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_category"/>
+        <NamedIndividual IRI="#Monawada_Amme_Akuru"/>
+        <NamedIndividual IRI="#classical"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_content"/>
+        <NamedIndividual IRI="#Monawada_Amme_Akuru"/>
+        <NamedIndividual IRI="#mothers_love"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#sing_by"/>
+        <NamedIndividual IRI="#Monawada_Amme_Akuru"/>
+        <NamedIndividual IRI="#Samitha_Mudunkotuwa"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_category"/>
+        <NamedIndividual IRI="#Pana_Mada_Kadithi"/>
+        <NamedIndividual IRI="#slow"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#sing_by"/>
+        <NamedIndividual IRI="#Pana_Mada_Kadithi"/>
+        <NamedIndividual IRI="#Sunil_Edirisinghe"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_category"/>
+        <NamedIndividual IRI="#Sunil_Edirisinghe"/>
+        <NamedIndividual IRI="#classical"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_category"/>
+        <NamedIndividual IRI="#Uththama_Muni_Dalada"/>
+        <NamedIndividual IRI="#slow"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#major_content"/>
+        <NamedIndividual IRI="#Uththama_Muni_Dalada"/>
+        <NamedIndividual IRI="#country"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#sing_by"/>
+        <NamedIndividual IRI="#Uththama_Muni_Dalada"/>
+        <NamedIndividual IRI="#Dharmadasa_Walpola"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#sub_category"/>
+        <NamedIndividual IRI="#Uththama_Muni_Dalada"/>
+        <NamedIndividual IRI="#classical"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#Ahasa_Polawa_Watapitawa"/>
+        <Literal datatypeIRI="&xsd;integer">197</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#Ahasa_Polawa_Watapitawa"/>
+        <Literal datatypeIRI="&xsd;integer">3</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#Akurata_Yannata_Kammali_Hithila"/>
+        <Literal datatypeIRI="&xsd;integer">189</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#Akurata_Yannata_Kammali_Hithila"/>
+        <Literal datatypeIRI="&xsd;integer">5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#Amma_Sandaki"/>
+        <Literal datatypeIRI="&xsd;integer">197</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#Amma_Sandaki"/>
+        <Literal datatypeIRI="&xsd;integer">4</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#Degoda_Thala_Ganga_Gala"/>
+        <Literal datatypeIRI="&xsd;integer">181</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#Degoda_Thala_Ganga_Gala"/>
+        <Literal datatypeIRI="&xsd;integer">4</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#Lebunat_Net_Youga"/>
+        <Literal datatypeIRI="&xsd;integer">266</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#Lebunat_Net_Youga"/>
+        <Literal datatypeIRI="&xsd;integer">4</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#year"/>
+        <NamedIndividual IRI="#Lebunat_Net_Youga"/>
+        <Literal datatypeIRI="&xsd;integer">1990</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#Mata_Mani_Wage"/>
+        <Literal datatypeIRI="&xsd;integer">208</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#Mata_Mani_Wage"/>
+        <Literal datatypeIRI="&xsd;integer">3</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#Monawada_Amme_Akuru"/>
+        <Literal datatypeIRI="&xsd;integer">192</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#Monawada_Amme_Akuru"/>
+        <Literal datatypeIRI="&xsd;integer">3</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#year"/>
+        <NamedIndividual IRI="#Monawada_Amme_Akuru"/>
+        <Literal datatypeIRI="&xsd;integer">1990</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#Pana_Mada_Kadithi"/>
+        <Literal datatypeIRI="&xsd;integer">209</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#Pana_Mada_Kadithi"/>
+        <Literal datatypeIRI="&xsd;integer">4</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#Uththama_Muni_Dalada"/>
+        <Literal datatypeIRI="&xsd;integer">254</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#Uththama_Muni_Dalada"/>
+        <Literal datatypeIRI="&xsd;integer">4</Literal>
+    </DataPropertyAssertion>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#compose"/>
+        <ObjectProperty IRI="#compose_by"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#music"/>
+        <ObjectProperty IRI="#music_by"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#sing"/>
+        <ObjectProperty IRI="#sing_by"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#write"/>
+        <ObjectProperty IRI="#writting_by"/>
+    </InverseObjectProperties>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#belongs_to"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#compose"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#compose_by"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#genre"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#major_content"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#music"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#music_by"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#sing"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#sing_by"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#sub_category"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#write"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#writting_by"/>
+    </FunctionalObjectProperty>
+    <SymmetricObjectProperty>
+        <ObjectProperty IRI="#compose"/>
+    </SymmetricObjectProperty>
+    <SymmetricObjectProperty>
+        <ObjectProperty IRI="#music"/>
+    </SymmetricObjectProperty>
+    <SymmetricObjectProperty>
+        <ObjectProperty IRI="#sing"/>
+    </SymmetricObjectProperty>
+    <SymmetricObjectProperty>
+        <ObjectProperty IRI="#write"/>
+    </SymmetricObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#belongs_to"/>
+        <Class IRI="#Song"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#compose"/>
+        <Class IRI="#Composer"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#compose_by"/>
+        <Class IRI="#Song"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#genre"/>
+        <Class IRI="#Song"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#major_category"/>
+        <Class IRI="#Song"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#major_content"/>
+        <Class IRI="#Song"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#music"/>
+        <Class IRI="#Musician"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#music_by"/>
+        <Class IRI="#Song"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#sing"/>
+        <Class IRI="#Singer"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#sing_by"/>
+        <Class IRI="#Song"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#sub_category"/>
+        <Class IRI="#Song"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#sub_content"/>
+        <Class IRI="#Song"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#write"/>
+        <Class IRI="#Writer"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#writting_by"/>
+        <Class IRI="#Song"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#belongs_to"/>
+        <Class IRI="#Album"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#compose"/>
+        <Class IRI="#Song"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#compose_by"/>
+        <Class IRI="#Composer"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#genre"/>
+        <Class IRI="#Genre"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#major_category"/>
+        <Class IRI="#Category"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#major_content"/>
+        <Class IRI="#Content"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#music"/>
+        <Class IRI="#Song"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#music_by"/>
+        <Class IRI="#Musician"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#sing"/>
+        <Class IRI="#Song"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#sing_by"/>
+        <Class IRI="#Singer"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#sub_category"/>
+        <Class IRI="#Category"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#sub_content"/>
+        <Class IRI="#Content"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#write"/>
+        <Class IRI="#Song"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#writting_by"/>
+        <Class IRI="#Writer"/>
+    </ObjectPropertyRange>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#duration"/>
+    </FunctionalDataProperty>
+    <DataPropertyDomain>
+        <DataProperty IRI="#duration"/>
+        <Class IRI="#Song"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#rating"/>
+        <Class IRI="#Song"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#year"/>
+        <Class IRI="#Song"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#duration"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#rating"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#year"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
+
